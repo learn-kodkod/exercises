@@ -19,35 +19,38 @@ commander (a Soldier object)
 soldiers (list of Soldier instances)
 A method briefing() that prints the unit name and calls the commander’s report().
 
-											class Weapon:
-												def __init__(self,name: str,ammo: int):
-													self.name =name
-													self.ammo = ammo
-													self.total_weapons = 0
-													
-													self.total_weapons += 1
-												
-												def  report()(self):
-													print(f"weapon {self.name} ammo amount {self.ammo} total weapon {self.total}")
-													
-											class Soldier:
-												def __init__(self,name: str,rank: str, weapon: Weapon):
-													self.name = name
-													self.rank = rank
-													seif.weapon = weapon
-													
-												def  report(self):
-													print(f"The solder {self.name} rank is {self.rank}  have weapon (seif.weapon}" )
-													
-											class Unit:
-												def __init__(self,name: str, commander: Soldier,soldiers: Soldier[] ):
-													
-													self.name = name
-													self.commander =commander
-													self.soldiers = soldiers
-												
-												def  report(self):
-													print(f"Unit name {self.name} the comander is {self.commander}
+											
+
+class Weapon:
+    def __init__(self, name: str, ammo: int):
+        self.name = name
+        self.ammo = ammo
+        self.total_weapons = 0
+
+        self.total_weapons += 1
+
+    def report(self):
+        print(f"weapon {self.name} ammo amount {self.ammo} total weapon {self.total_weapons}")
+
+
+class Soldier:
+    def __init__(self, name: str, rank: str, weapon: Weapon):
+        self.name = name
+        self.rank = rank
+        self.weapon = weapon
+
+    def report(self):
+        print(f"The solder {self.name} rank is {self.rank}  have weapon {self.weapon}")
+
+
+class Unit:
+    def __init__(self, name: str, commander: Soldier, soldiers: list):
+        self.name = name
+        self.commander = commander
+        self.soldiers = soldiers
+
+    def report(self):
+        print(f"Unit name {self.name} the comander is {self.commander}")
 
 
 🔍 Exercise 2: Strike Options
@@ -62,85 +65,195 @@ Add one or more StrikeOption objects to your Unit class from Exercise 1, so each
 Demonstrate a unit using its strike options in a loop.
 
 
-												class StrikeOption:
-													def __init__(self,name: str, ammo=0):												
-														self.name =name
-														self.ammo = ammo
-														
-													def strike(self):
-														pass
-													
-												class Tank(StrikeOption):
-													def __init__(self,name: str, ammo=0):
-														super().__init__(name, ammo)
-													def strike(self):
-														if self.ammo > 0:
-															self.ammo -= 1
-															print(f" The tank shoot tank shell")
-															
-												class Drone(StrikeOption):
-													def __init__(self,name: str, ammo=0):
-														super().__init__(name, ammo)
-													def strike(self):
-														if self.ammo > 0:
-															self.ammo -= 1
-															print(f" The Drone shoot missile")
-															
-												class Unit:
-													def __init__(self,name: str, commander: Soldier,soldiers: list, strikeOptions: list):
-														
-														self.name = name
-														self.commander =commander
-														self.soldiers = soldiers
-														self.strikeOption = strikeOption
-													
-													def  report(self):
-															print(f"Unit name {self.name} the comander is {self.commander}"}
-															
-												moshe = Soldier("moshe",soldier","long galil")	
-												soldiers = [moshe]												
-												galil_short = Weapon("short galil", 15)
-												dani = Soldier("Dani","oficer",galil)
-												tank_m = Tank("Merkava", 30)
-												drown_x = Drone("drown x",5)
-												
-												StrikeOptions  =[drown_x,tank_m]
-												Unit_669 = Unit("669",dani,soldiers,StrikeOptions)
-												for strikOption in Unit_669.strikeOption:
-													strikOption.strike()
+class Weapon:
+    def __init__(self, name: str, ammo: int):
+        self.name = name
+        self.ammo = ammo
+        self.total_weapons = 0
+
+        self.total_weapons += 1
+
+    def report(self):
+        print(f"weapon {self.name} ammo amount {self.ammo} total weapon {self.total_weapons}")
+
+class Soldier:
+    def __init__(self, name: str, rank: str, weapon: Weapon):
+        self.name = name
+        self.rank = rank
+        self.weapon = weapon
+
+    def report(self):
+        print(f"The solder {self.name} rank is {self.rank}  have weapon {self.weapon}")
+
+class StrikeOption:
+    def __init__(self, name: str, ammo=0):
+        self.name = name
+        self.ammo = ammo
+
+    def strike(self):
+        pass
 
 
+class Tank(StrikeOption):
+    def __init__(self, name: str, ammo=0):
+        super().__init__(name, ammo)
+
+    def strike(self):
+        if self.ammo > 0:
+            self.ammo -= 1
+            print(f" The tank shoot tank shell")
+
+
+class Drone(StrikeOption):
+    def __init__(self, name: str, ammo=0):
+        super().__init__(name, ammo)
+
+    def strike(self):
+        if self.ammo > 0:
+            self.ammo -= 1
+            print(f" The Drone shoot missile")
+
+
+class Unit:
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        self.name = name
+        self.commander = commander
+        self.soldiers = soldiers
+        self.strike_options = strike_options
+
+    def report(self):
+        print(f"Unit name {self.name} the comander is {self.commander}")
+
+l_galil = Weapon("long galil", 15)
+moshe = Soldier("moshe", "soldier",l_galil)
+a_soldiers = [moshe]
+galil_short = Weapon("short galil", 15)
+dani = Soldier("Dani", "oficer", galil_short)
+tank_m = Tank("Merkava", 30)
+drown_x = Drone("drown x", 5)
+
+Strike_options = [drown_x, tank_m]
+Unit_669 = Unit("669", dani, a_soldiers, Strike_options)
+for strikoption in Unit_669.strike_options:
+    strikoption.strike()
+	
+	
+	
 🔍 Exercise 3: Mission Briefing
 Objective: Add intelligence and planning.
 Tasks:
 Create a class Agent with:
-
-
 codename (string)
-
-
 clearance_level (int)
-
-
 Create a class Mission with:
-
-
 mission_name (string)
-
-
 target (string)
-
-
 assigned_agent (an Agent object)
-
-
 A method briefing() that prints mission details and the agent’s codename.
-
-
 Create a class MissionManager that manages a list of missions with methods to add, list, and remove missions.
-
-
 Connect the missions to existing units, so each mission involves at least one Unit.
+
+
+
+class Agent:
+    def __init__(self, codename: str, clearance_level: int):
+        self.codename = codename
+        self.clearance_level = clearance_level
+
+class Mission:
+    def __init__(self, mission_name: str, target: str,assigned_agent: Agent ):
+        self.mission_name = mission_name
+        self.target = target
+        self.assigned_agent = assigned_agent
+
+    def briefing(self):
+        print(f"mission name {self.mission_name}  target is {self.target} with agent {self.assigned_agent.codename}")
+
+
+
+class Weapon:
+    def __init__(self, name: str, ammo: int):
+        self.name = name
+        self.ammo = ammo
+        self.total_weapons = 0
+
+        self.total_weapons += 1
+
+    def report(self):
+        print(f"weapon {self.name} ammo amount {self.ammo} total weapon {self.total_weapons}")
+
+class Soldier:
+    def __init__(self, name: str, rank: str, weapon: Weapon):
+        self.name = name
+        self.rank = rank
+        self.weapon = weapon
+
+    def report(self):
+        print(f"The solder {self.name} rank is {self.rank}  have weapon {self.weapon}")
+
+class StrikeOption:
+    def __init__(self, name: str, ammo=0):
+        self.name = name
+        self.ammo = ammo
+
+    def strike(self):
+        pass
+
+
+class Tank(StrikeOption):
+    def __init__(self, name: str, ammo=0):
+        super().__init__(name, ammo)
+
+    def strike(self):
+        if self.ammo > 0:
+            self.ammo -= 1
+            print(f" The tank shoot tank shell")
+
+
+class Drone(StrikeOption):
+    def __init__(self, name: str, ammo=0):
+        super().__init__(name, ammo)
+
+    def strike(self):
+        if self.ammo > 0:
+            self.ammo -= 1
+            print(f" The Drone shoot missile")
+
+
+class Unit:
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        self.name = name
+        self.commander = commander
+        self.soldiers = soldiers
+        self.strike_options = strike_options
+
+    def report(self):
+        print(f"Unit name {self.name} the comander is {self.commander}")
+
+
+class MissionManager:
+    def __init__(self, missions: list, units: list):
+        if len(missions) == 0:
+            self.missions = missions
+            self.units = {}
+        if len(missions) == len(units):
+            self.missions = missions
+            self.units = {}
+            for index,mission in enumerate(self.missions):
+                self.units[mission] = [units[index]]
+        else:
+            raise ValueError("The list size are not equal ")
+
+
+    def add(self, mission: Mission, units: list):
+        self.missions.append(mission)
+        self.units[mission] = units
+
+    def remove(self, mission: Mission):
+        if mission in self.missions:
+            self.missions.remove(mission)
+            del self.units[mission]
+
 
 
 
@@ -148,15 +261,71 @@ Connect the missions to existing units, so each mission involves at least one Un
 Objective: Expand the types of units.
 Tasks:
 Add an abstract method attack() in the base Unit class.
-
-
 Implement concrete subclasses Infantry and Tank, each with their own attack() method.
-
-
 Add a new subclass Sniper with its own attack() method without modifying the existing classes.
-
-
 Ensure that missions can use different types of units when executed.
+
+
+
+class Unit(ABC):
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        self.name = name
+        self.commander = commander
+        self.soldiers = soldiers
+        self.strike_options = strike_options
+
+    def report(self):
+        print(f"Unit name {self.name} the comander is {self.commander}")
+
+    @abstractmethod
+    def attack(self):
+        pass
+
+class MissionManager:
+    def __init__(self, missions: list, units: list):
+        if len(missions) == 0:
+            self.missions = missions
+            self.units = {}
+        if len(missions) == len(units):
+            self.missions = missions
+            self.units = {}
+            for index,mission in enumerate(self.missions):
+                self.units[mission] = [units[index]]
+        else:
+            raise ValueError("The list size are not equal ")
+
+
+    def add(self, mission: Mission, units: list):
+        self.missions.append(mission)
+        self.units[mission] = units
+
+    def remove(self, mission: Mission):
+        if mission in self.missions:
+            self.missions.remove(mission)
+            del self.units[mission]
+
+
+
+class Tank(Unit):
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        super().__init__( name, commander, soldiers, strike_options)
+
+    def attack(self):
+        print(f"tank fires with cannon ")
+
+
+class Infantry(Unit):
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        super().__init__(name, commander, soldiers, strike_options)
+
+    def attack(self):
+        print(f"shot with rifles ")
+
+class Sniper(Unit):
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        super().__init__(name, commander, soldiers, strike_options)
+    def attack(self):
+        print(f"Unit {self.name} (Sniper) takes a long-range shot.")
 
 
 
@@ -164,18 +333,169 @@ Ensure that missions can use different types of units when executed.
 Objective: Manage multiple units under one army.
 Tasks:
 Create a class Army with:
-
-
 A list of units (Unit objects)
-
-
 A static field total_attacks (initially 0)
-
-
 A method attack_all() that calls attack() on all units and increments total_attacks.
-
-
 Add your existing units (Infantry, Tank, Sniper, etc.) into the Army and demonstrate a coordinated attack.
+
+
+
+from abc import ABC, abstractmethod
+
+class Agent:
+    def __init__(self, codename: str, clearance_level: int):
+        self.codename = codename
+        self.clearance_level = clearance_level
+
+class Mission:
+    def __init__(self, mission_name: str, target: str,assigned_agent: Agent ):
+        self.mission_name = mission_name
+        self.target = target
+        self.assigned_agent = assigned_agent
+
+    def briefing(self):
+        print(f"mission name {self.mission_name}  target is {self.target} with agent {self.assigned_agent.codename}")
+
+
+
+class Weapon:
+    def __init__(self, name: str, ammo: int):
+        self.name = name
+        self.ammo = ammo
+        self.total_weapons = 0
+
+        self.total_weapons += 1
+
+    def report(self):
+        print(f"weapon {self.name} ammo amount {self.ammo} total weapon {self.total_weapons}")
+
+class Soldier:
+    def __init__(self, name: str, rank: str, weapon: Weapon):
+        self.name = name
+        self.rank = rank
+        self.weapon = weapon
+
+    def report(self):
+        print(f"The solder {self.name} rank is {self.rank}  have weapon {self.weapon}")
+
+class StrikeOption:
+    def __init__(self, name: str, ammo=0):
+        self.name = name
+        self.ammo = ammo
+
+    def strike(self):
+        pass
+
+
+
+class Tank(StrikeOption):
+    def __init__(self, name: str, ammo=0):
+        super().__init__(name, ammo)
+
+    def strike(self):
+        if self.ammo > 0:
+            self.ammo -= 1
+            print(f" The tank shoot tank shell")
+
+
+
+class Drone(StrikeOption):
+    def __init__(self, name: str, ammo=0):
+        super().__init__(name, ammo)
+
+    def strike(self):
+        if self.ammo > 0:
+            self.ammo -= 1
+            print(f" The Drone shoot missile")
+
+
+class Unit(ABC):
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        self.name = name
+        self.commander = commander
+        self.soldiers = soldiers
+        self.strike_options = strike_options
+
+    def report(self):
+        print(f"Unit name {self.name} the comander is {self.commander}")
+
+    @abstractmethod
+    def attack(self):
+        pass
+
+class MissionManager:
+    def __init__(self, missions: list, units: list):
+        if len(missions) == 0:
+            self.missions = missions
+            self.units = {}
+        if len(missions) == len(units):
+            self.missions = missions
+            self.units = {}
+            for index,mission in enumerate(self.missions):
+                self.units[mission] = [units[index]]
+        else:
+            raise ValueError("The list size are not equal ")
+
+
+    def add(self, mission: Mission, units: list):
+        self.missions.append(mission)
+        self.units[mission] = units
+
+    def remove(self, mission: Mission):
+        if mission in self.missions:
+            self.missions.remove(mission)
+            del self.units[mission]
+
+
+
+class Tanks(Unit):
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        super().__init__( name, commander, soldiers, strike_options)
+
+    def attack(self):
+        print(f"tank fires with cannon ")
+
+
+class Infantry(Unit):
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        super().__init__(name, commander, soldiers, strike_options)
+
+    def attack(self):
+        print(f"shot with rifles ")
+
+class Sniper(Unit):
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        super().__init__(name, commander, soldiers, strike_options)
+    def attack(self):
+        print(f"Unit {self.name} (Sniper) takes a long-range shot.")
+
+class Army:
+    def __init__(self, units: list):
+        self.total_attacks = 0
+        self.units = units
+
+    def attack_all(self):
+        for unit in self.units:
+            unit.attack()
+            self.total_attacks += 1
+
+
+l_galil = Weapon("long galil", 15)
+moshe = Soldier("moshe", "soldier",l_galil)
+a_soldiers = [moshe]
+galil_short = Weapon("short galil", 15)
+dani = Soldier("Dani", "oficer", galil_short)
+meni = Soldier("Meni", "oficer", galil_short)
+tank_m = Tank("Merkava", 30)
+drown_x = Drone("drown x", 5)
+tank_Strike_options = [tank_m]
+drown_Strike_options = [drown_x]
+unit_tanks = Tanks("tanks", dani, a_soldiers, tank_Strike_options)
+unit_sniper = Sniper("snifers", meni, a_soldiers,[])
+idf = Army([unit_tanks,unit_sniper])
+idf.attack_all()
+
+
 
 
 
@@ -183,74 +503,541 @@ Add your existing units (Infantry, Tank, Sniper, etc.) into the Army and demonst
 Objective: Bring everything together.
 Tasks:
 Create a class Commander (a Soldier with higher rank).
-
-
 Extend the Mission class into subclasses:
-
-
 ReconMission
-
-
 StrikeMission
-
-
 RescueMission
  Each mission is assigned to a specific Unit from the Army.
-
-
 Implement execute() in each mission type, making use of the assigned unit’s attack() or strike().
-
-
 Use the MissionManager to run several missions in sequence and display their outcomes.
-
-
-
 ⭐ Advanced Features
+
+
+
+
+from abc import ABC, abstractmethod
+
+class Agent:
+    def __init__(self, codename: str, clearance_level: int):
+        self.codename = codename
+        self.clearance_level = clearance_level
+
+class Mission:
+    def __init__(self, mission_name: str, target: str,assigned_agent: Agent ,assigned_unit: 'Unit'):
+        self.mission_name = mission_name
+        self.target = target
+        self.assigned_agent = assigned_agent
+        self.assigned_unit = assigned_unit
+
+    def briefing(self):
+        print(f"mission name {self.mission_name}  target is {self.target} with agent {self.assigned_agent.codename} and "
+              f"unit {self.assigned_unit.name}")
+
+    @abstractmethod
+    def execute(self):
+        pass
+
+
+class Weapon:
+    def __init__(self, name: str, ammo: int):
+        self.name = name
+        self.ammo = ammo
+        self.total_weapons = 0
+
+        self.total_weapons += 1
+
+    def report(self):
+        print(f"weapon {self.name} ammo amount {self.ammo} total weapon {self.total_weapons}")
+
+class Soldier:
+    def __init__(self, name: str, rank: str, weapon: Weapon):
+        self.name = name
+        self.rank = rank
+        self.weapon = weapon
+
+    def report(self):
+        print(f"The solder {self.name} rank is {self.rank}  have weapon {self.weapon}")
+
+class StrikeOption:
+    def __init__(self, name: str, ammo=0):
+        self.name = name
+        self.ammo = ammo
+
+    def strike(self):
+        pass
+
+
+
+class Tank(StrikeOption):
+    def __init__(self, name: str, ammo=0):
+        super().__init__(name, ammo)
+
+    def strike(self):
+        if self.ammo > 0:
+            self.ammo -= 1
+            print(f" The tank shoot tank shell")
+
+
+
+class Drone(StrikeOption):
+    def __init__(self, name: str, ammo=0):
+        super().__init__(name, ammo)
+
+    def strike(self):
+        if self.ammo > 0:
+            self.ammo -= 1
+            print(f" The Drone shoot missile")
+
+
+class Unit(ABC):
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        self.name = name
+        self.commander = commander
+        self.soldiers = soldiers
+        self.strike_options = strike_options
+
+    def report(self):
+        print(f"Unit name {self.name} the comander is {self.commander}")
+
+    @abstractmethod
+    def attack(self):
+        pass
+
+class MissionManager:
+    def __init__(self, missions: list, units: list):
+        if len(missions) == 0:
+            self.missions = missions
+            self.units = {}
+        if len(missions) == len(units):
+            self.missions = missions
+            self.units = {}
+            for index,mission in enumerate(self.missions):
+                self.units[mission] = [units[index]]
+        else:
+            raise ValueError("The list size are not equal ")
+
+
+    def add(self, mission: Mission, units: list):
+        self.missions.append(mission)
+        self.units[mission] = units
+
+    def remove(self, mission: Mission):
+        if mission in self.missions:
+            self.missions.remove(mission)
+            del self.units[mission]
+
+    def run_missions_in_sequence(self):
+        if not self.missions:
+            print("No missions in the queue.")
+            return
+
+        for mission in self.missions:
+            try:
+                mission.execute()
+            except Exception as e:
+                print(f"ERROR executing {mission.mission_name}: {e}")
+
+class Tanks(Unit):
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        super().__init__( name, commander, soldiers, strike_options)
+
+    def attack(self):
+        print(f"tank fires with cannon ")
+
+
+class Infantry(Unit):
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        super().__init__(name, commander, soldiers, strike_options)
+
+    def attack(self):
+        print(f"shot with rifles ")
+
+class Sniper(Unit):
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        super().__init__(name, commander, soldiers, strike_options)
+
+    def attack(self):
+        print(f"Unit {self.name} (Sniper) takes a long-range shot.")
+
+class Army:
+    def __init__(self, units: list):
+        self.total_attacks = 0
+        self.units = units
+
+    def attack_all(self):
+        for unit in self.units:
+            unit.attack()
+            self.total_attacks += 1
+
+class ReconMission(Mission):
+    def execute(self):
+        self.assigned_unit.attack()  
+        print(f"Recon completed by {self.assigned_unit.name}. Target observed: {self.target}.")
+
+
+class StrikeMission(Mission):
+    def execute(self):
+        print(f"--- Executing STRIKE Mission: {self.mission_name} ---")
+        if self.assigned_unit.strike_options:
+            print("Initiating strike options...")
+            # הפעלת כל יכולות StrikeOption של היחידה
+            for option in self.assigned_unit.strike_options:
+                option.strike()
+        else:
+            print("No heavy strike options available. Using direct unit attack.")
+            self.assigned_unit.attack()
+
+
+class RescueMission(Mission):
+    def execute(self):
+        print(f"--- Executing RESCUE Mission: {self.mission_name} ---")
+        # דוגמה לשימוש פנימי אחר
+        print(f"Unit {self.assigned_unit.name} is securing the area before extraction.")
+        self.assigned_unit.attack()
+        print("Rescue complete. All assets secured.")
+
+
+class MissionManager:
+    def __init__(self, missions: list = None, unit_assignments: dict = None):
+        self.missions = missions if missions is not None else []
+        self.unit_assignments = unit_assignments if unit_assignments is not None else {}
+
+    def add(self, mission: Mission, units: list):
+        if mission not in self.missions:
+            self.missions.append(mission)
+            self.unit_assignments[mission] = units
+        else:
+            self.unit_assignments[mission].extend(units)
+
+    def remove(self, mission: Mission):
+        if mission in self.missions:
+            self.missions.remove(mission)
+            del self.unit_assignments[mission]
+            print(f"Removed mission: {mission.mission_name}")
+        else:
+            raise ValueError(f"Mission '{mission.mission_name}' not found for removal.")
+
+    def run_missions_in_sequence(self):
+        if not self.missions:
+            print("No missions in the queue.")
+            return
+
+        for mission in self.missions:
+            try:
+                mission.execute()
+            except Exception as e:
+                print(f"ERROR executing {mission.mission_name}: {e}")
+
+
+l_galil = Weapon("long galil", 15)
+s_galil = Weapon("short galil", 15)
+agent_a = Agent("Ghost", 5)
+
+soldier_m = Soldier("Moshe", "rab alof", l_galil)
+soldier_b = Soldier("Baruch", "samal", s_galil)
+
+tank_m = Tank("Merkava", 30)
+drone_x = Drone("Drone X", 10)
+
+unit_tanks = Tanks("Thunder", soldier_m, [soldier_b], [tank_m])
+unit_sniper = Sniper("Spectre", soldier_m, [soldier_b], [])
+unit_infantry = Infantry("Ranger", soldier_b, [soldier_b], [drone_x])
+
+mission1 = ReconMission("Desert Scan", "Oasis 4", agent_a, unit_sniper)
+mission2 = RescueMission("Hostage Extract", "Zone Green", agent_a, unit_infantry)
+mission3 = StrikeMission("HQ Attack", "Fortress 9", agent_a, unit_tanks)
+
+
+manager = MissionManager()
+manager.add(mission1, [unit_sniper])
+manager.add(mission2, [unit_infantry])
+manager.add(mission3, [unit_tanks])
+
+manager.run_missions_in_sequence()
+
+
+
+
 
 🔍 Exercise 7: Weapon Enhancements
 Add a method reload(amount) to Weapon that increases ammo but does not exceed a maximum capacity.
-
-
 Give each Weapon a unique serial number using a static counter.
+
+class Weapon:
+    serial_counter = 0
+    def __init__(self, name: str, ammo: int,max_capacity:int):
+        self.name = name
+        self.ammo = ammo
+        self.max_capacity = max_capacity
+        Weapon.serial_counter += 1
+        self.serial_number = Weapon.serial_counter
+        self.total_weapons =  Weapon.serial_counter
+    def report(self):
+        print(f"weapon {self.name} ammo amount {self.ammo} total weapon {self.total_weapons}")
+
+    def reload(self, amount):
+        if self.ammo + amount > self.max_capacity:
+            self.ammo = self.max_capacity
+        else:
+            self.ammo += amount
+
+
+
 
 
 
 🔍 Exercise 8: Strike Enhancements
 Deduct ammo after each strike() call. If ammo is 0, print "Out of ammo".
-
-
 Add a field range (short/medium/long) to each StrikeOption and include it in the strike message.
+
+
+class StrikeOption:
+    def __init__(self, name: str, ammo=0,range= "short"):
+        self.name = name
+        self.ammo = ammo
+        if range in ["short","medium","long"]:
+            self.range = range
+
+    def strike(self):
+        pass
+
+
+
+class Tank(StrikeOption):
+    def __init__(self, name: str, ammo=0, range= "short"):
+        super().__init__(name, ammo,range)
+
+    def strike(self):
+        if self.ammo > 0:
+            self.ammo -= 1
+            print(f" The tank shoot tank shell as {self.range} range")
+        else:
+            print("Out of ammo")
+
+
+
+class Drone(StrikeOption):
+    def __init__(self, name: str, ammo=0,range= "short"):
+        super().__init__(name, ammo,range)
+
+    def strike(self):
+        if self.ammo > 0:
+            self.ammo -= 1
+            print(f" The Drone shoot missile as {self.range} range")
+
 
 
 
 🔍 Exercise 9: Mission Manager Enhancements
 Prevent assigning an agent with insufficient clearance to a mission.
-
-
 Add a method find_by_agent(codename) in MissionManager to list all missions of a given agent.
+
+
+class Mission:
+    def __init__(self, mission_name: str, target: str,assigned_agent: Agent ,assigned_unit: 'Unit',required_clearance: int):
+        self.mission_name = mission_name
+        self.target = target
+        self.assigned_agent = assigned_agent
+        self.assigned_unit = assigned_unit
+        self.required_clearance = required_clearance
+
+    def briefing(self):
+        print(f"mission name {self.mission_name}  target is {self.target} with agent {self.assigned_agent.codename} and "
+              f"unit {self.assigned_unit.name}")
+
+    @abstractmethod
+    def execute(self):
+        pass
+
+
+class MissionManager:
+    def __init__(self, missions: list, units: list):
+        if len(missions) == 0:
+            self.missions = missions
+            self.units = {}
+        if len(missions) == len(units):
+            self.missions = missions
+            self.units = {}
+            for index,mission in enumerate(self.missions):
+                self.units[mission] = [units[index]]
+        else:
+            raise ValueError("The list size are not equal ")
+
+
+    def add(self, mission: Mission, units: list):
+        self.missions.append(mission)
+        self.units[mission] = units
+
+    def remove(self, mission: Mission):
+        if mission in self.missions:
+            self.missions.remove(mission)
+            del self.units[mission]
+
+    def run_missions_in_sequence(self):
+        if not self.missions:
+            print("No missions in the queue.")
+            return
+
+        for mission in self.missions:
+            try:
+                mission.execute()
+            except Exception as e:
+                print(f"ERROR executing {mission.mission_name}: {e}")
+                
+ def find_by_agent(self, codename: str) -> list:
+        found_missions = []
+        for mission in self.missions:
+            if mission.assigned_agent.codename == codename:
+                found_missions.append(mission)
+
+        return found_missions
+
+    def list_missions_by_agent(self, codename: str):
+        missions = self.find_by_agent(codename)
+        if not missions:
+            print(f"No missions found for agent {codename}.")
+            return
+
+        print(f"\n--- Missions for Agent {codename} ---")
+        for m in missions:
+            print(f"- {m.mission_name} (Target: {m.target})")
+
+
+
+
 
 
 
 🔍 Exercise 10: Unit Enhancements
 Add a random hit chance (0–100) to the attack() method for all units.
-
-
 Print whether the attack succeeded or failed.
+
+
+import random
+
+
+
+class Tank(StrikeOption):
+    def __init__(self, name: str, ammo=0, range= "short"):
+        super().__init__(name, ammo,range)
+
+    def strike(self):
+        if self.ammo > 0:
+            self.ammo -= 1
+            print(f" The tank shoot tank shell as {self.range} range")
+        else:
+            print("Out of ammo")
+
+
+        HIT_CHANCE = 90
+        chance = random.randint(1, 100)
+        print(f"Unit {self.name} (Tank) attempts to fire (Required: <={HIT_CHANCE}). Roll: {chance}")
+        if chance <= HIT_CHANCE:
+            print(f"Hit! Tank fires with cannon.")
+        else:
+            print(f"Miss the shot.")
+    
+
+class Drone(StrikeOption):
+    def __init__(self, name: str, ammo=0,range= "short"):
+        super().__init__(name, ammo,range)
+
+    def strike(self):
+        if self.ammo > 0:
+            self.ammo -= 1
+            print(f" The Drone shoot missile as {self.range} range")
+        HIT_CHANCE = 90
+        chance = random.randint(1, 100)
+        print(f"Unit {self.name} (Drone) attempts to fire (Required: <={HIT_CHANCE}). Roll: {chance}")
+        if chance <= HIT_CHANCE:
+            print(f"Hit! TDrone shoot missile.")
+        else:
+            print(f"Miss the shot.")
+
+
 
 
 
 🔍 Exercise 11: Army Enhancements
 Track how many attacks each unit has performed.
-
-
 Add a method strongest_unit() that returns the unit with the most ammo or the largest number of soldiers.
 
 
+class Unit(ABC):
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        self.name = name
+        self.commander = commander
+        self.soldiers = soldiers
+        self.strike_options = strike_options
+        self.attack_count = 0
 
-🔍 Exercise 12: Mission Execution Enhancements
+    def report(self):
+        print(f"Unit name {self.name} the comander is {self.commander}")
+
+    @abstractmethod
+    def attack(self):
+        pass
+
+
+class Tanks(Unit):
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        super().__init__( name, commander, soldiers, strike_options)
+
+    def attack(self):
+
+        print(f"tank fires with cannon ")
+        self.attack_count += 1
+
+class Infantry(Unit):
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        super().__init__(name, commander, soldiers, strike_options)
+
+    def attack(self):
+        print(f"shot with rifles ")
+        self.attack_count += 1
+
+class Sniper(Unit):
+    def __init__(self, name: str, commander: Soldier, soldiers: list, strike_options: list):
+        super().__init__(name, commander, soldiers, strike_options)
+
+    def attack(self):
+        print(f"Unit {self.name} (Sniper) takes a long-range shot.")
+        self.attack_count += 1
+
+
+class Army:
+    def __init__(self, units: list):
+        self.total_attacks = 0
+        self.units = units
+
+    def attack_all(self):
+        for unit in self.units:
+            unit.attack()
+            self.total_attacks += 1
+
+    def strongest_unit(self):
+        if not self.units:
+            return None
+
+        strongest = None
+        max_power = -1
+
+        for unit in self.units:
+            total_ammo = sum(option.ammo for option in unit.strike_options)
+
+            unit_power = max(total_ammo, len(unit.soldiers))
+
+            if unit_power > max_power:
+                max_power = unit_power
+                strongest = unit
+
+        return strongest
+
+
+
+ Exercise 12: Mission Execution Enhancements
 If a mission is assigned to an incompatible unit (e.g., ReconMission without a Drone), print a failure message.
-
-
 Deduct ammo or resources during mission execution and keep track of success/failure counts.
+
 
 
