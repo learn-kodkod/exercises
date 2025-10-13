@@ -1,0 +1,175 @@
+1) NameError – accessing a non-existent variable
+def greet():
+    return f"Hello, {username}!"
+print(greet())
+
+Find & fix: Where should username come from?				   def greet(username):
+
+   
+
+2) UnboundLocalError – assignment shadows a global
+count = 10
+def bump():
+    count += 1
+    return count
+print(bump())
+
+Find & fix: Why does assigning to count fail?              					count not declare as global in function
+
+3) AttributeError – wrong method/attribute
+text = "debugging"
+print(text.push("!"))
+
+Find & fix: Strings don’t have this method—what’s the correct way?  		print(f("{text} !")
+
+4) IndexError – list index out of range
+nums = [1, 2, 3]
+for i in range(0, len(nums)):
+    print(nums[i + 1])														print(nums[i])					
+
+Find & fix: Off-by-one in indexing.																	
+
+5) KeyError – missing dictionary key
+config = {"host": "localhost", "port": 5432}
+print(config["username"])													
+
+Find & fix: Handle absent keys safely.										print(config["host"])
+
+6) TypeError – adding incompatible types
+age = "12"
+print(age + 5)																print(int(age) + 5)
+
+Find & fix: Choose the right conversion or operation.						print(int(age) + 5)
+
+7) ValueError – bad int conversion
+user_input = "12.5"
+print(int(user_input))														
+
+Find & fix: Parse correctly or validate input.								print(user_input)
+		
+8) ZeroDivisionError – unchecked divisor
+def ratio(a, b):
+    return a / b
+print(ratio(10, 0))
+
+Find & fix: Guard against zero.              								if b == 0:
+																				print("ZeroDivisionError")
+																				return None
+
+9) FileNotFoundError – wrong path					
+with open("data.csv") as f:
+    print(f.readline()) 
+
+Find & fix: Make the path robust or handle missing files.  
+except Exception as e:              try:
+																				with open("data.csv") as f:
+																				print(f.readline()) 
+																		except Exception as e:
+																				print(f"An error occurred: {e}")
+except Exception as e:
+
+10) ImportError / ModuleNotFoundError – misspelled import
+import jsonn
+print(json.dumps({"ok": True}))
+
+Find & fix: Typo in module name.										import json
+
+11) RecursionError – missing base case
+def down(n):
+    return down(n - 1)
+print(down(5))
+
+Find & fix: Add a stopping condition.                               if n == 0: 
+																		retun n
+
+12) Infinite loop – loop condition never changes
+x = 5
+while x > 0:
+    print(x)
+# x never changes
+
+Find & fix: Ensure progress toward termination.						while x > 0:
+																		print(x)		
+																		x -= 1
+
+13) Mutable default argument – state “leaks” across calls
+def add_item(item, bucket=[]):
+    bucket.append(item)
+    return bucket
+
+print(add_item("a"))
+print(add_item("b"))
+
+Find & fix: Use a safe default pattern.											
+																	def add_item(item, bucket=None):
+																		if bucket is None:
+																			bucket = []
+																		bucket.append(item)
+																		return bucket
+
+
+
+14) Late binding in closures – all functions print same value  
+funcs = []
+for i in range(3):
+    funcs.append(lambda: print(i))
+
+for f in funcs:
+    f()  # Expected 0,1,2; what happens?								functions.append(lambda k=i: print(k))
+																		  בללולאה נקבל תמיד ערך אחרון
+
+Find & fix: Bind current i at creation time.
+
+15) Modifying a list while iterating – skipped elements
+items = [1, 2, 3, 4, 5]
+
+for x in items:
+    if x % 2 == 0:
+        items.remove(x)
+print(items)
+
+Find & fix: Avoid in-place mutation during iteration.           odd_items = []
+																if x % 2 == 0:
+																		odd_items.append(x)
+																print(items)
+	
+
+16) Shadowing a builtin – unexpected errors later
+list = [1, 2, 3]
+print(list( ("a", "b") ))
+
+Find & fix: Don’t overwrite builtins.			       			my_list = [1, 2, 3]			dont overide list function	
+
+17) Logging misconfiguration – messages don’t appear
+import logging
+logging.debug("Start")   # Why no output?						default logging level in Python is WARNING and debug is less 
+
+Find & fix: Configure the logger/level/handlers properly.		logging.basicConfig(level=logging.DEBUG) 
+
+																logging.debug("Start: Program initialization beginning.")
+
+18) Wrong operator precedence – logic bug, no exception	
+a, b, c = True, False, True
+if a and b or c == True:
+    print("Pass")
+else:
+    print("Fail")
+
+Find & fix: Make precedence explicit so logic matches intention.       if (a and b) or (c == True):
+
+19) f-string with missing variable – runtime NameError
+name = "Avi"
+print(f"User: {full_name}")
+
+Find & fix: Use the correct variable or define it.  					last_name = "cohen"
+																		full_name =  name + " " +  last_name                
+
+20) Off-by-one in range – last element never processed
+data = [10, 20, 30, 40]
+total = 0
+for i in range(len(data) - 1):
+    total += data[i]
+print("Total:", total)  # Why is 40 missing?                            becouse it get to len -1
+
+Find & fix: Iterate over all elements.     								for i in range(len(data)):
+    total += data[i]

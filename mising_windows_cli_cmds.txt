@@ -1,0 +1,100 @@
+excersise that cmmand are not presssent in presentation:
+
+
+
+Starting Point
+ Avraham opens the command line and wants to check which directory he is currently in.
+
+c:\Users>cd
+
+
+Exploring the Environment
+ Now that Alex knows where he is, he wants to see which files and folders exist in the current directory.
+
+c:\Users>dir
+
+
+Navigating to the Users Folder
+ Avraham decides to move to the C:\Users directory to access his personal files.
+
+c:\Users>cd DELL
+
+
+Creating a New Project Folder
+ Inside his user directory, Avraham wants to start a new project, so he creates a folder named MyFolder.
+
+c:\Users\DELL>mkdir MyFolder
+
+need to add explanation of > >>
+
+Starting a Document
+ Inside MyFolder, Avraham starts a new document to write down the project plan and writes “Hello” in it.
+
+echo "Hello" > MyFile.txt
+
+
+Adding More Notes
+ He remembers some more ideas and adds the word “World” to the same file.
+
+echo "World" >> MyFile.txt
+
+
+
+Renaming for Clarity
+ The file name looks too generic to him, so he decides to change it to something clearer.
+
+c:\Users\DELL\MyFolder>ren MyFile.txt MynewFile.txt
+
+
+
+
+Creating a Backup
+ To avoid losing data, Avraham creates a copy of the file with the new name.
+
+c:\Users\DELL\MyFolder>copy MynewFile.txt MycopyFile.txt
+        1 file(s) copied.
+
+
+
+File Organization
+ He moves the backup file to a dedicated folder where all backups are stored.
+
+c:\Users\DELL\MyFolder>move MycopyFile.txt "c:\Users\DELL\MyBackup"
+        1 file(s) moved.
+
+
+Deleting Unnecessary Files
+ After realizing that the original file is no longer needed, he deletes it.
+
+c:\Users\DELL\MyFolder>del MynewFile.txt
+
+
+Advanced
+Checking Network Connection
+ Before uploading the project, Avraham checks his IP address settings.
+
+c:\Users\DELL\MyFolder>ipconfig
+
+
+
+Identity Verification
+ For documentation purposes, Avraham verifies which user is currently logged into the system to make sure he is working under the correct account.
+
+c:\Users\DELL\MyFolder>whoami
+
+Checking System Performance
+ He notices the computer is running slower than usual, so he decides to check which processes are running in the background and may be consuming too many resources.
+
+c:\Users\DELL\MyFolder>tasklist
+
+Closing Unnecessary Applications
+ Avraham identifies that Notepad is open without being used and decides to close it to free up resources.
+
+c:\Users\DELL\MyFolder>taskkill /IM notepad.exe
+
+
+
+Reopening for Editing
+ Later, he remembers he still has more to edit in the document and reopens Notepad to add a few lines.
+
+c:\Users\DELL\MyBackup>notepad MycopyFile.txt

@@ -1,0 +1,72 @@
+1) Meaningful Names
+def f(a, b):
+    return a / (b * 60)
+
+print(f(120, 2))
+
+Task: Rename the function and variables so the purpose is obvious (e.g., calculating speed, rate, etc.).
+																							def kilumeter_per_minute(distance, hour_number):
+																								return distance / (hour_number * 60)
+
+																							print(kilumeter_per_minute(120, 2))
+
+
+2) Magic Numbers
+def area(r):
+    return 3.14159 * r * r
+
+print(area(5))
+
+Task: Remove the “magic number” and replace it with a named constant.
+																					def area(radius):
+																						return 3.14159 * radius * radius
+
+																					print(area(5))
+
+3) Duplicated Code
+def print_user1(name, age):
+    print("User:", name)
+    print("Age:", age)
+
+def print_admin_user(name, age):
+    print("User:", name)
+    print("Age:", age)
+
+Task: Eliminate duplication with one reusable function.  
+																					def print_user_detalils(name, age):
+																						print("User:", name)
+																						print("Age:", age)
+																						 
+
+4) Long Function
+def process_user(*data):
+    name = data[0]
+    age = data[1]
+    print("User:", name)
+    if age < 18:
+        print("Minor")
+    else:
+        print("Adult")
+    if age >= 65:
+        print("Senior")
+
+Task: Split into smaller functions with clear names.
+
+5) Inconsistent Formatting & Poor Readability
+def calc(x,y):return x+y;print(calc(2,3))
+
+Task: Format properly, use spacing, and separate logic from execution.
+																					def user_info(name):
+																						print("User:", name)
+																						
+																					def user_status(age):
+																						if age < 18:
+																							print("Minor")
+																						else:
+																							print("Adult")
+																						if age >= 65:
+																							print("Senior")
+																							
+																					def process_user(*data):
+																						user_info(data[0])
+																						user_status(data[1])

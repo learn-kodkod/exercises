@@ -1,0 +1,256 @@
+OOP Training Exercises – Military Simulation
+
+🔍 Exercise 1: Army Inventory
+Objective: Build the foundation of the simulation.
+Tasks:
+Create a class Weapon with:
+name (string)
+ammo (int)
+A static field total_weapons (initially 0).
+ Each time a new weapon is created, increase total_weapons by 1.
+Create a class Soldier with:
+name (string)
+rank (string)
+weapon (instance of Weapon)
+A method report() that prints the soldier’s details.
+Create a class Unit with:
+unit_name (string)
+commander (a Soldier object)
+soldiers (list of Soldier instances)
+A method briefing() that prints the unit name and calls the commander’s report().
+
+											class Weapon:
+												def __init__(self,name: str,ammo: int):
+													self.name =name
+													self.ammo = ammo
+													self.total_weapons = 0
+													
+													self.total_weapons += 1
+												
+												def  report()(self):
+													print(f"weapon {self.name} ammo amount {self.ammo} total weapon {self.total}")
+													
+											class Soldier:
+												def __init__(self,name: str,rank: str, weapon: Weapon):
+													self.name = name
+													self.rank = rank
+													seif.weapon = weapon
+													
+												def  report(self):
+													print(f"The solder {self.name} rank is {self.rank}  have weapon (seif.weapon}" )
+													
+											class Unit:
+												def __init__(self,name: str, commander: Soldier,soldiers: Soldier[] ):
+													
+													self.name = name
+													self.commander =commander
+													self.soldiers = soldiers
+												
+												def  report(self):
+													print(f"Unit name {self.name} the comander is {self.commander}
+
+
+🔍 Exercise 2: Strike Options
+Objective: Introduce strike capabilities to the army.
+Tasks:
+Create a base class StrikeOption with:
+name (string)
+ammo (int)
+A method strike().
+Create subclasses Tank and Drone that override the strike() method with a custom message.
+Add one or more StrikeOption objects to your Unit class from Exercise 1, so each unit can have strike capabilities.
+Demonstrate a unit using its strike options in a loop.
+
+
+												class StrikeOption:
+													def __init__(self,name: str, ammo=0):												
+														self.name =name
+														self.ammo = ammo
+														
+													def strike(self):
+														pass
+													
+												class Tank(StrikeOption):
+													def __init__(self,name: str, ammo=0):
+														super().__init__(name, ammo)
+													def strike(self):
+														if self.ammo > 0:
+															self.ammo -= 1
+															print(f" The tank shoot tank shell")
+															
+												class Drone(StrikeOption):
+													def __init__(self,name: str, ammo=0):
+														super().__init__(name, ammo)
+													def strike(self):
+														if self.ammo > 0:
+															self.ammo -= 1
+															print(f" The Drone shoot missile")
+															
+												class Unit:
+													def __init__(self,name: str, commander: Soldier,soldiers: list, strikeOptions: list):
+														
+														self.name = name
+														self.commander =commander
+														self.soldiers = soldiers
+														self.strikeOption = strikeOption
+													
+													def  report(self):
+															print(f"Unit name {self.name} the comander is {self.commander}"}
+															
+												moshe = Soldier("moshe",soldier","long galil")	
+												soldiers = [moshe]												
+												galil_short = Weapon("short galil", 15)
+												dani = Soldier("Dani","oficer",galil)
+												tank_m = Tank("Merkava", 30)
+												drown_x = Drone("drown x",5)
+												
+												StrikeOptions  =[drown_x,tank_m]
+												Unit_669 = Unit("669",dani,soldiers,StrikeOptions)
+												for strikOption in Unit_669.strikeOption:
+													strikOption.strike()
+
+
+🔍 Exercise 3: Mission Briefing
+Objective: Add intelligence and planning.
+Tasks:
+Create a class Agent with:
+
+
+codename (string)
+
+
+clearance_level (int)
+
+
+Create a class Mission with:
+
+
+mission_name (string)
+
+
+target (string)
+
+
+assigned_agent (an Agent object)
+
+
+A method briefing() that prints mission details and the agent’s codename.
+
+
+Create a class MissionManager that manages a list of missions with methods to add, list, and remove missions.
+
+
+Connect the missions to existing units, so each mission involves at least one Unit.
+
+
+
+🔍 Exercise 4: Open/Closed – New Units
+Objective: Expand the types of units.
+Tasks:
+Add an abstract method attack() in the base Unit class.
+
+
+Implement concrete subclasses Infantry and Tank, each with their own attack() method.
+
+
+Add a new subclass Sniper with its own attack() method without modifying the existing classes.
+
+
+Ensure that missions can use different types of units when executed.
+
+
+
+🔍 Exercise 5: Battle Simulation
+Objective: Manage multiple units under one army.
+Tasks:
+Create a class Army with:
+
+
+A list of units (Unit objects)
+
+
+A static field total_attacks (initially 0)
+
+
+A method attack_all() that calls attack() on all units and increments total_attacks.
+
+
+Add your existing units (Infantry, Tank, Sniper, etc.) into the Army and demonstrate a coordinated attack.
+
+
+
+🔍 Exercise 6: Combined Mission
+Objective: Bring everything together.
+Tasks:
+Create a class Commander (a Soldier with higher rank).
+
+
+Extend the Mission class into subclasses:
+
+
+ReconMission
+
+
+StrikeMission
+
+
+RescueMission
+ Each mission is assigned to a specific Unit from the Army.
+
+
+Implement execute() in each mission type, making use of the assigned unit’s attack() or strike().
+
+
+Use the MissionManager to run several missions in sequence and display their outcomes.
+
+
+
+⭐ Advanced Features
+
+🔍 Exercise 7: Weapon Enhancements
+Add a method reload(amount) to Weapon that increases ammo but does not exceed a maximum capacity.
+
+
+Give each Weapon a unique serial number using a static counter.
+
+
+
+🔍 Exercise 8: Strike Enhancements
+Deduct ammo after each strike() call. If ammo is 0, print "Out of ammo".
+
+
+Add a field range (short/medium/long) to each StrikeOption and include it in the strike message.
+
+
+
+🔍 Exercise 9: Mission Manager Enhancements
+Prevent assigning an agent with insufficient clearance to a mission.
+
+
+Add a method find_by_agent(codename) in MissionManager to list all missions of a given agent.
+
+
+
+🔍 Exercise 10: Unit Enhancements
+Add a random hit chance (0–100) to the attack() method for all units.
+
+
+Print whether the attack succeeded or failed.
+
+
+
+🔍 Exercise 11: Army Enhancements
+Track how many attacks each unit has performed.
+
+
+Add a method strongest_unit() that returns the unit with the most ammo or the largest number of soldiers.
+
+
+
+🔍 Exercise 12: Mission Execution Enhancements
+If a mission is assigned to an incompatible unit (e.g., ReconMission without a Drone), print a failure message.
+
+
+Deduct ammo or resources during mission execution and keep track of success/failure counts.
+
+

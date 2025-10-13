@@ -1,0 +1,219 @@
+Secret Agent operation Py
+ 🔍 Exercise 1: Create an Agent Class
+ Create a class called Agent that includes: 
+ class Agent():
+ clearance_level (int)
+A method report() that prints:
+ "Agent [code_name] reporting. Clearance Level: [clearance_level]"
+																					class Agent
+																					def __INIT__(self, clearance_level):
+																						seld.clearance_level = clearance_level
+																						
+																					def report(self, code_name):
+																						print(f"Agent {code_name} reporting. Clearance Level: {self.clearance_level}")
+
+
+
+📡 Exercise 2: Add a Mission Class and Use Composition
+ Objective: Understand how classes can interact via object composition.
+ Create a class called Mission that includes:
+mission_name (string)
+target_location (string)
+assigned_agent (an Agent object) + a method to assign.
+A method brief() that prints:
+ "Mission: [mission_name], Target: [target_location], Agent: [code_name]"
+
+
+																		class Agent:
+																		def __init__(self, code_name):
+																			self.code_name = code_name
+
+																		def get_code_name(self):
+																			return self.code_name
+																			
+																		class Mission:
+    
+																			def __init__(self, name, location):
+																			   
+																				self.mission_name = name
+																				self.target_location = location
+																				self.assigned_agent = None
+
+																			def assign_agent(self, agent_object):
+																				"""
+																				Assigns an Agent object to the mission.
+
+																				Args:
+																					agent_object (Agent): An instance of the Agent class.
+																				"""
+																				if isinstance(agent_object, Agent):
+																					self.assigned_agent = agent_object
+																					print(f"Agent {agent_object.get_code_name()} has been assigned to Mission: {self.mission_name}.")
+																				else:
+																					print("Error: The assigned object is not a valid Agent.")
+
+																			
+																			def brief(self):
+																			   
+																				if self.assigned_agent:
+																					agent_name = self.assigned_agent.get_code_name()
+																				else:
+																					agent_name = "UNASSIGNED"
+
+																				print(f"Mission: {self.mission_name}, Target: {self.target_location}, Agent: {agent_name
+																			
+																			
+																			
+
+																			agent_007 = Agent("Phoenix")
+																			secret_mission = Mission("Operation Firefall", "Geneva")
+																			secret_mission.assign_agent(agent_007)
+																			secret_mission.brief()
+
+
+
+								
+🕵️ Exercise 3: Implement Access Modifiers
+ Objective: Use private fields and create getter/setter methods.
+ Update the Agent class:
+Make __clearance_level a private field.
+Create get_clearance_level() and set_clearance_level(level: int) methods.
+In set_clearance_level, prevent setting values below 1 or above 5.
+
+
+																			self.__clearance = clearance
+																			
+																			def get_clearance_level():
+																				return self.__clearance
+																				
+																			def set_clearance_level(clearance):
+																				if 1 <= clearance <= 5:
+																					self.__clearance = clearance
+
+
+
+🛰️ Exercise 4: Create a Static Utility Class IntelTools
+ Objective: Learn about static methods and utility classes.
+ Create a class IntelTools with:
+@staticmethod encrypt_message(msg: str) – returns the reversed string.
+
+
+@staticmethod log_transmission(agent_name: str, message: str) – prints:
+ "[agent_name] sent encrypted message: [message]"
+
+																			@staticmethod
+																			def IntelTools(encrypt_message):
+																				return encrypt_message[::-1]
+																				
+																			@staticmethod
+																			def log_transmission(agent_name: str, message: str):
+																					return f"{agent_name} sent encrypted message: {message}"
+
+
+
+
+🗂️ Exercise 5: Project – Field Report System
+ Objective: Apply OOP principles together: encapsulation, composition, static methods.
+ Build the following:
+Agent class
+
+
+Report class:
+
+
+Fields: summary, urgency_level, submitted_by (Agent)
+
+
+MissionControl class:
+
+
+Method analyze_report(r: Report):
+
+
+If urgency_level >= 4 → print "Immediate response required."
+
+
+If urgency_level == 3 → print "High priority. Monitor closely."
+
+
+Else → print "Routine analysis."
+
+
+Usage scenario:
+
+
+Create an Agent from Unit 8200.
+
+
+Submit a Report with urgency 4.
+
+
+Call analyze_report() and log the transmission using IntelTools.log_transmission().
+
+																				class Agent:
+
+																					def __init__(self, code_name: str, unit: str):
+																						self._code_name = code_name
+																						self._unit = unit
+
+																					def get_code_name(self) -> str:
+																						return self._code_name
+
+																					def get_unit(self) -> str:
+																						return self._unit
+
+
+																				class Report:
+																					def __init__(self, summary: str, urgency_level: int, submitted_by: Agent):
+																						self.summary = summary
+																						self.urgency_level = self._validate_urgency(urgency_level)
+																						self.submitted_by = submitted_by
+																					
+																					def _validate_urgency(self, level: int):
+																						if not 1 <= level <= 5:
+																							print(f"{Level} not legal")
+																							return 3
+																						return level
+
+																				class IntelTools:
+																				 
+																					@staticmethod
+																					def log_transmission(message: str):
+																						print(f"--- [SYSTEM LOG] --- נרשם ליומן: {message}")
+
+
+																				class MissionControl:
+																				  
+																					@staticmethod
+																					def analyze_report(report: Report):
+																						urgency = report.urgency_level
+																						agent_name = report.submitted_by.get_code_name()
+
+																						verdict = ""
+																						if urgency >= 4:
+																							verdict = "Immediate response required."
+																						elif urgency == 3:
+																							verdict = "High priority. Monitor closely."
+																						else:
+																							verdict = "Routine analysis."
+																						print(f"{verdict}")
+
+																					   
+																						log_msg = (f"summeryt: {report.summary}  agent :{agent_name} "
+																								   f"urgency: {urgency}verdict: {verdict}")
+																						IntelTools.log_transmission(log_msg)
+																						
+
+
+																					agent_8200 = Agent(code_name="Ghost", unit="8200")
+																				   
+																					critical_report = Report(
+																						summary="מזsutcase disappeared",
+																						urgency_level=4,
+																						submitted_by=agent_8200 
+																					)
+																					print(f"summery: {critical_report.summary}. urgencyת: {critical_report.urgency_level}")
+																					
+																					
+																					MissionControl.analyze_report(critical_report)
+

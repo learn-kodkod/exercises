@@ -1,0 +1,144 @@
+Git Task: "Professor Max’s Lost Notes"
+📖 The Story:
+You are helping Professor Max, a smart but messy scientist. He writes magic spells in a file, but he saved different spells in different places. Your job is to use Git to help him organize all the spells into one file.
+
+🎯 Your Task:
+Use Git to save the spells, work on different branches, and put them all together in the main file.
+
+📝 Steps:
+Create a new folder called professor-max-notes.                                     mkdir professor-max-notes
+
+
+Turn the folder into a Git repository and make your first commit.                   cd professor-max-notes
+																					git init
+																					git add .
+																					git commit -m "first commit"
+
+
+In that folder, create a file named spellbook.txt.									echo "" > spellbook.txt
+
+
+In the file, write this first line:													echo "Professor Max’s Spellbook" >> spellbook.txt
+																					git add .
+																					git commit -m "first commit"
+ Professor Max’s Spellbook
+
+
+Now, Professor Max remembers a spell from yesterday:
+
+
+Make a new branch called yesterday-notes											git branch yesterday-notes
+
+																					git checkout yesterday-notes
+
+
+Add this line to the file:
+ "Levitatio Scriptus – makes text float in the air"									echo "Levitatio Scriptus – makes text float in the air" >> spellbook.txt
+
+
+Save and commit the change															git add .
+																					git  commit -m "first save in yesterday-notes"
+																					
+
+
+Then he remembers an old spell:
+
+
+Go back to the main branch															git checkout master
+
+
+Make a new branch called ancient-spell												git branch ancient-spell
+																					git checkout ancient-spell
+
+
+Add this line to the file:
+ "Ignifero Digitus – makes your finger shoot fire"									echo "Ignifero Digitus – makes your finger shoot fire" >> spellbook.txt
+
+
+Save and commit the change															git add .
+																					git  commit -m "first save in ancient-spell"
+
+
+Show the list of all the commits you made.											
+																					git show 
+																					git show HEAD~1
+																					git show HEAD~2
+
+
+🏴‍☠️ Git Task: "Captain Codebeard’s Treasure Map"
+🧭 The Story:
+You are working on a pirate ship with Captain Codebeard. He’s drawing a secret treasure map using code and storing it with Git. But the map keeps changing, and some files should be hidden from the crew. He needs your help to manage the files with Git before someone steals the treasure!
+
+🎯 Your Task:
+Use Git to track changes to the map, work with different versions
+
+📝 Steps:
+Create a folder called pirate-map.												mkdir pirate-map
+																				cd pirate-map
+
+
+Inside it, make a file called map.txt and write this line:						echo "X marks the treasure at Skull Island" > map.txt
+ X marks the treasure at Skull Island
+
+
+Initialize a Git repository and check the current status of files.				git init
+																				git status
+
+
+Add the file to the staging area and commit with a message.						git add map.txt
+																				git commit -m "map.txt v 1"
+
+
+Captain Codebeard wants to add a new clue:
+
+
+Add this line to map.txt:
+ Clue: Go 10 steps north from the broken palm tree								echo "Clue: Go 10 steps north from the broken palm tree" >> map.txt
+
+
+Before committing, use Git to see the difference between the last version and the current one.  git status
+
+
+Stage and commit the change with a message.                                		git add .
+																				git commit -m "map.txt v 2"
+
+
+Captain Codebeard makes a mistake!
+
+
+He accidentally adds a file named secret-plan.txt.								echo "" > secret-plan.txt
+
+
+It should not be tracked.					
+
+
+Remove it from Git tracking but keep it in the folder.    						
+
+
+Create a .gitignore file and make sure secret-plan.txt is listed there.          echo "secret-plan.txt" >  .gitignore
+
+
+Add and commit the .gitignore file.												git add .gitignore
+																				git commit "add gitignore"
+
+
+Captain wants to try a new version of the map:
+
+
+Create a branch called alternate-route    										git branch alternate-route
+																				git checkout alternate-route
+
+
+In map.txt, change the clue to:
+ Clue: Go 5 steps south from the hanging rope bridge							notepade map.txt
+																				change the clue to: "Clue: Go 5 steps south from the hanging rope bridge"
+
+Commit this change.																git add .
+																				git commit -m "map.txt v 3"
+
+
+Switch back to the main branch and view the last 3 commits.						git checkout master
+																				
+																				git show 
+																				git show HEAD~1
+																				git show HEAD~2

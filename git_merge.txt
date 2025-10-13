@@ -1,0 +1,32 @@
+מתרגילים בראנץ ומרג' וקונפליקט
+
+
+	ליצור תיקיית ריפו בשם Military-Project ולאתחל אותו בגיט INIT                    mkdir Military-Project
+																					cd Military-Project
+																					git init
+
+ליצור קובץ טקסט בתיקייה ולתת לו שם צבאי -modiin										echo "" > modiin.txt
+להוסיף את הטקסט" All Systems are OFFLINE"											echo "All Systems are OFFLINE" >> modiin.txt
+לפתוח CMD בתקייה ולבדוק סטאטוס 														git status
+לבצע add ו-commit בהתאם																git add .
+																					git commit -m "add modiin.txt"
+ליצור 2 ברנצים בשמות unit-alpha unit-669 											git branch unit-alpha
+																					git branch unit-669
+																					
+לצאת ל ברנץ unit-669-																git checkout unit-669
+להוסיף לקובץ טקסט: All Systems  are ON  											echo "All Systems  are ON" >> modiin.txt
+לחזור על פעולה 5 																	git add .
+																					git commit -m "modiin.txt v 2 669"
+																					
+לצאת לברנץ unit-alpha																git checkout unit-alpha
+להוסיף לקובץ טקסט :Unit-alpha  are  ON  											echo "Unit-alpha  are  ON" >> modiin.txt
+לבצע add ו-commit בהתאם																git add .
+																					git commit -m "modiin.txt v 2 alpha "
+לצאת למאסטר (למי שאין MASTER  ורוצה לשנות   git branch -m main master)				git checkout master
+למרג'ג'  את unit-669 למאסטר															git merge unit-669
+למרג'ג' את  unit-alpha למאסטר														git merge unit-alpha
+תוכלו לראות את השינוי  וההבדל בין הבראנצ'ים בעזרת git diff							git diff
+																					
+לפתור קונפליקט																		----- fix conflict --- 
+לבצע add ו-commit בהתאם																git add .
+																					git commit -m "after merge with 669 and alpha"

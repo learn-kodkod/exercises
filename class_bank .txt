@@ -1,0 +1,57 @@
+Bank account exercise:
+
+Exercise: The Bank Account Class
+Your task is to create a Python script that models a bank account system.
+Instructions:
+Define the BankAccount Class:
+Create a new class named BankAccount.
+The constructor (__init__) should take two parameters: account_holder (a string) and initial_balance (a float).
+Inside the constructor, initialize two instance variables: self.holder and self.balance.
+Add Methods to the Class:
+Create a transfer_funds(self, other_account, amount) method. This method should take another BankAccount object and an amount as arguments. It should:
+Check if the current account has a sufficient balance to perform the transfer.
+If there are enough funds, subtract the amount from the current account's balance and add it to the other_account's balance.
+Print a message confirming the transfer.
+If there are not enough funds, print an error message.
+Create a __str__(self) method. This special method should return a formatted string that provides a clear overview of the account's status, including the account holder's name and the current balance.
+Create and Interact with Objects:
+Create two separate BankAccount objects, each with a different account holder and an initial balance.
+Print the initial status of both accounts using the __str__ method.
+Call the transfer_funds method to transfer an amount from one account to the other.
+Print the final status of both accounts to see the result of the transaction.
+
+class BankAccount():
+    def __init__(self, account_holder,initial_balance=0.0):
+        self.holder = account_holder
+        self.balance = initial_balance
+        print(f"The bank account of {self.holder} have {self.balance:.2f} shekel")
+
+    def add(self,amount):
+        self.balance += amount
+
+    def get_balance(self):
+        return self.balance
+
+    def __str__(self):
+        return(f"The bank account of {self.holder} have {self.balance:.2f} shekel")
+
+
+    def transfer_funds(self ,other_account,amount):
+        if self.balance >= amount:
+            other_account.add(amount)
+            self.balance -= amount
+        else:
+            print(f"The acount of {self.holder} do not have enough for the transfer ")
+
+mosh_bank_account  = BankAccount("Moshe",400)
+dani_bank_account  = BankAccount("Dani",700)
+print(mosh_bank_account)
+print(dani_bank_account)
+mosh_bank_account.transfer_funds(dani_bank_account,200)
+print(mosh_bank_account)
+print(dani_bank_account)
+
+
+
+
+

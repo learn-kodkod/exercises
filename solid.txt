@@ -1,0 +1,368 @@
+Single Responsibility Principle (S)
+📘 Exercise S1: Book and File Saving
+Objective: Separate data representation from file operations.
+Create a class Book with:
+title (string)
+author (string)
+content (string)
+The class currently includes a method save_to_file(filename) that writes the content to a file.
+🔹 Task: Refactor the design so Book is only responsible for storing book data, and another class takes care of saving to a file.
+												
+														
+												
+												class Book:
+													def __init__(self, title ,author,content):
+														self.title = title
+														self.author = author
+														self.content = content
+														
+														class BookSaver:
+															def __init__(self, book):
+																self.book = book
+
+															def save_to_file(self, filename):
+																with open(filename, 'w') as f:
+																	f.write(self.book.content)
+													
+													
+									
+
+
+📘 Exercise S2: Student and Grade Calculation
+Objective: Split responsibilities of holding data and performing calculations.
+Create a class Student with:
+name (string)
+grades (list of integers)
+The class has a method average_grade() that calculates the average.
+🔹 Task: Refactor the design so Student holds only student information, and a new class GradeCalculator is responsible for calculating averages.
+
+														class Student:
+														def __init__(self, name, grades):
+															self.name = name
+															self.grades = grades
+														
+														
+														class  GradeCalculator:
+															def __init__(self, student):
+																self.student = student
+																
+															def average_grade(self):
+																total_sum = sum(self.student.grades)
+																if len(self.student.grades) == 0:
+																	return 0
+																return total_sum / len( self.student.grades)
+														
+														
+														
+														
+															
+														
+														
+
+
+
+
+
+
+📘 Exercise S3: Order and Printing
+Objective: Avoid mixing business logic with presentation.
+Create a class Order with:
+items (list of strings)
+total_price (float)
+A method print_invoice() that prints the order details.
+🔹 Task: Refactor the design so Order handles only the order data, and a new class InvoicePrinter is responsible for printing.
+
+													class Order:
+														def __init__(self,items,total_price):
+															self.items = items
+															self.total_price = total_price
+
+													class InvoicePrinter:
+														def __init__(self,order):
+															self.order = order
+														
+														def print_invoice(self):
+														print(f"The order detailes contains items {' '.join(self.order.items)} with total price of {self.order.total_price}")
+					
+													
+														
+													
+													
+
+
+
+🟦 Open/Closed Principle (O)
+📘 Exercise O1: Shapes and Area
+Objective: Add new functionality without modifying existing code.
+Create a base class Shape with a method area().
+ Create two subclasses:
+Circle with radius r
+Square with side a
+🔹 Task: Add a new shape Rectangle without changing the code of Shape, Circle, or Square.
+
+												import math as pi
+												class Shape:
+													def __init__(self,name):
+														self.name = name
+													def area(self):
+														pass
+													
+												class Circle(Shape):
+													
+													def __init__(self,radius):
+														super().__init__(name)
+														self.radius = radius
+														
+													def area(self):
+														return	pi.pi * self.radius ** 2
+												
+												
+												class Square(Shape):
+													def __init__(self,side):
+														super().__init__(name)
+														self.side = side
+														
+													def area(self):
+														return self.side * self.side
+														
+												class Rectangle(shape):
+													def __init__(self,hight,base):
+														super().__init__(name)
+														self.hight = hight
+														self.base =  base
+													
+													def area(self):
+														return (self.base * self.hight) / 2
+
+📘 Exercise O2: Payment Methods
+Objective: Extend functionality through inheritance.
+Create a base class Payment with a method pay(amount).
+ Create two subclasses:
+CreditCardPayment
+PayPalPayment
+🔹 Task: Add a new class CryptoPayment without modifying the existing classes.
+
+														class Payment:
+		
+															def pay(self,amount):
+																pass
+																
+														class CreditCardPayment(Payment):
+															def pay(self,amount):
+																print(f" Processing {amount} via Credit Card")
+																return True
+															
+															
+															
+														class PayPalPayment(Payment):
+															def pay(self,amount):
+																print(f"Sending request for {amount} via PayPal")
+																return True
+															
+																
+														class CryptoPayment(Payment):
+															
+																def pay(self,amount):
+																print(f"Initiating Crypto transaction for {amount}")
+																return True
+																
+																
+
+
+
+📘 Exercise O3: Notification System
+
+Objective: Design extensible notification channels.
+Create a base class Notifier with a method send(message).
+ Create two subclasses:
+EmailNotifier
+SMSNotifier
+🔹 Task: Add a new notification type PushNotifier without modifying existing code.
+																
+																class Notifier:
+																	def send(self,message):
+																		print(f"send mesage {message}")
+																		
+																class EmailNotifier(Notifier):
+																	def send(self,message):
+																		print(f"Email Notifier {message}")
+																		
+																class SMSNotifier(Notifier):
+																	def send(self,message):
+																		print(f"sms Notifier {message}")
+																		
+																class PushNotifier(Notifier):
+																	def send(self,message):
+																		print(f"push Notifier {message}")
+																		
+																
+
+
+
+🔍  Liskov in Action
+Objective: Understand when inheritance breaks substitutability.
+Create a base class BirdUnit with a method fly().
+Create subclasses:
+Drone (can fly)
+Tank (should not fly)
+🔹 Task:
+Explain why this breaks the Liskov Substitution Principle.
+Refactor the design into separate FlyingUnit and GroundUnit classes.
+											class Unit:
+												pass
+
+											class BirdUnit(Unit):
+												def fly(self):
+													print("fling")
+													
+											class GroundUnit(Unit):
+												pass
+													
+											class FlyingUnit(BirdUnit):
+												pass
+											
+											
+										
+											class Drone(BirdUnit):
+												pass
+											
+											class Tank(GroundUnit):
+												pass
+
+
+
+
+
+
+
+
+
+
+
+🟦 Interface Segregation Principle (I)
+ 📘 Exercise I1: Soldiers and Skills
+ Objective: Identify when a large interface forces classes to implement unused methods.
+ Create an interface ISoldier with methods:
+shoot()
+navigate()
+callAirSupport()
+Create classes:
+Infantry (only shoots and navigates)
+ForwardObserver (shoots and calls air support)
+Pilot (calls air support, does not navigate like infantry)
+
+🔹 Task:
+ Explain why this design violates ISP.
+ Refactor the design into smaller interfaces (IShooter, INavigator, IAirSupportCaller) and assign them appropriately.
+
+													class IShooter:
+														deff shoot(self):
+															print("shoting")
+													
+													
+													class 	INavigator:
+														def navigate(self):
+															print("navigating")
+															
+													class IAirSupportCaller
+														def callAirSupport(self):
+															print("call air support")
+															
+														class Infantry(IShooter,INavigator):
+															pass
+														
+														
+														class ForwardObserver(IShooter,IAirSupportCaller):
+															pass
+															
+														class Pilot(IAirSupportCaller):
+															pass
+			
+	
+
+📘 Exercise I2: Military Vehicles
+ Objective: Show the problem with "fat" interfaces in class hierarchies.
+ Create an interface IVehicle with methods:
+drive()
+fly()
+sail()
+Create classes:
+Tank (only drives)
+FighterJet (flies, drives on runway)
+Submarine (sails underwater, does not fly/drive)
+🔹 Task:
+ Explain why forcing every vehicle to implement all three methods breaks ISP.
+ Refactor the design into smaller interfaces (IDrive, IFly, ISail).
+													class IDrive
+														def drive(self):
+															print("driving")
+													class IFly:
+														def fly(self):
+															print("fling")
+														
+													
+													class ISail
+														def sail(self):
+															print(sailing")
+															
+													class Tank(IDrive):
+														pass
+													
+													class FighterJet(IDrive,IFly):
+														def drive(self):
+															print("driving on runway")
+															
+													class Submarine(ISail):
+														def sail(self):
+															print(sailing underwater")
+
+📘 Exercise I3: Military Communication Systems
+ Objective: Avoid forcing clients to depend on methods they don’t use.
+ Create an interface ICommSystem with methods:
+sendRadio()
+
+
+sendSatellite()
+
+
+sendMorseCode()
+
+
+Create classes:
+FieldRadio (supports radio only)
+
+
+SatelliteComm (supports satellite only)
+
+
+LegacyMorseUnit (supports morse only)
+
+
+🔹 Task:
+ Explain why this design violates ISP.
+ Refactor the design so each communication type is a separate interface (IRadioComm, ISatelliteComm, IMorseComm).
+
+
+
+															class IRadioComm:
+																def sendRadio(self):
+																	print("send radio message")
+																
+															class ISatelliteComm:
+																def sendSatellite(self):
+																	print("send Satellite message")
+																
+															class  IMorseComm:
+																def sendMorseCode(self):
+																	print("send MorseCode message")
+																	
+															class FieldRadio(IRadioComm):
+																pass
+
+
+															class SatelliteComm(ISatelliteComm):
+																pass
+
+
+															class LegacyMorseUnitIMorseComm(:
+																pass

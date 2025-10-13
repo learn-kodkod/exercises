@@ -1,0 +1,163 @@
+Secret Agent Operation Exercises (Python Version)
+🔍 Exercise 1: Create an Agent Class
+ Create a class called Agent that includes:
+code_name (string)
+clearance_level (integer)
+A method report() that prints:
+Agent [code_name] reporting. Clearance Level: [clearance_level
+class Agent
+																					def __INIT__(self, code_name, clearance_level):
+																						self.code_name = code_name
+																						self.clearance_level = clearance_level
+																						
+																					def report(self, code_name):
+																						print(f"Agent {code_name} reporting. Clearance Level: {self.clearance_level}")
+
+
+
+
+
+
+
+📡 Exercise 2: Add a Mission Class and Use Composition
+ Objective: Understand how classes can interact via object composition.
+Create a class called Mission that includes:
+mission_name (string)
+target_location (string)
+assigned_agent (an Agent object) and a method to assign it.
+A method brief() that prints:
+ Mission: [mission_name], Target: [target_location], Agent: [code_name]
+ 
+ 
+ 
+																		class Agent:
+																			def __init__(self, code_name):
+																				self.code_name = code_name
+
+																			def get_code_name(self):
+																				return self.code_name
+																				
+																		class Mission:
+    
+																			def __init__(self, name, location):
+																			   
+																				self.mission_name = name
+																				self.target_location = location
+																				self.assigned_agent = None
+
+																			def assign_agent(self, agent_object):
+																				
+																				if isinstance(agent_object, Agent):
+																					self.assigned_agent = agent_object
+																					print(f"Agent {agent_object.get_code_name()} has been assigned to Mission: {self.mission_name}.")
+																				else:
+																					print("Error: The assigned object is not a valid Agent.")
+
+																			
+																			def brief(self):
+																			   
+																				if self.assigned_agent:
+																					agent_name = self.assigned_agent.get_code_name()
+																				else:
+																					agent_name = "UNASSIGNED"
+
+																				print(f"Mission: {self.mission_name}, Target: {self.target_location}, Agent: {agent_name
+ 
+ 
+ 
+ 
+ 
+🕵️ Exercise 3: Implement Encapsulation with Getters and Setters
+ Objective: Practice encapsulation in Python.
+In the Agent class, make the clearance_level a “protected” field (use a leading underscore, e.g., _clearance_level).
+Create getter and setter methods for clearance_level.
+Add validation in the setter so that clearance_level cannot be set below 1 or above 10.
+
+																			self.__clearance = clearance
+																			
+																			def get_clearance_level():
+																				return self.__clearance
+																				
+																			def set_clearance_level(clearance):
+																				if 1 <= clearance <= 10:
+																					self.__clearance = clearance
+
+
+
+
+
+
+💻 Exercise 4: Inheritance with Specialized Agents
+ Objective: Use inheritance to extend class functionality.
+Create a subclass of Agent called FieldAgent.
+Add a new property region (string).
+Override the report() method so that it also prints the region.
+
+																		class FieldAgent(Agent):
+																			def __INIT__(self, region)
+																				self.region = region
+																			
+																			def report():
+																				print(f"Agent code name {self.code_name} and his regen is  {self.regen}")
+
+
+
+🎯 Exercise 5: Polymorphism with Multiple Agents
+ Objective: Demonstrate polymorphism in Python.
+Create another subclass of Agent called CyberAgent.
+Add a property specialty (e.g., “hacking”).
+Override the report() method so that it includes the specialty.
+Write a function that takes a list of Agent objects (including subclasses) and calls their report() method to show polymorphism in action.
+
+																	class CyberAgent(Agent):
+																		def __INIT__(self, hacking)
+																			self.hacking = hacking
+																			
+																		def report():
+																			print(f"Agent code name {self.code_name} and his hacking is  {self.hacking}")
+
+																		agent1 = Agent("007")
+																		agent2 = FieldAgent("008","england")
+																		agent3 = CyberAgent("009", "hacker_class_1")
+																		agents = [agent1,agent2,agent3)
+																		for agent in agents:
+																			agent.report()
+
+
+
+⚡ Exercise 6: Static Methods and Class Variables
+ Objective: Explore static methods and class properties in Python.
+Add a class variable total_agents in the Agent class to keep track of how many agents are created.
+Increment it each time a new Agent (or subclass) is initialized.
+Add a static method get_total_agents() that prints the current number of agents.
+
+
+																		class Agent:
+																			def __init__(self, code_name,total_agents=0):
+																				self.code_name = code_name
+																				self.total_agents += 1
+
+																			@staticmethod
+																			def get_total_agents():
+																				print(f"Total agens number is {self.total_agents})
+																				
+																				
+🔐 Exercise 7: Singleton Pattern (Advanced)
+ Objective: Implement a singleton in Python.
+Create a class AgencyDirector that ensures only one instance can exist.
+The first time it is created, it should store the director’s name.
+Any subsequent attempts to create a new instance should return the same object.
+																					class AgencyDirector:
+																						_instance = None 
+
+																						def __new__(cls, director_name=None):
+																							if cls._instance is None:
+																								cls._instance = super(AgencyDirector, cls).__new__(cls)
+																								cls._instance.director_name = director_name
+																							return cls._instance
+																							
+																							
+																				
+
+
+
