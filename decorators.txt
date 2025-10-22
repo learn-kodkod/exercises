@@ -1,0 +1,186 @@
+Basic Exercises
+Hello Decorator
+ Write a decorator that prints "Start function" before the function runs and "End function" after it finishes.
+
+def add_text(func):
+	def wrapper_add_text(*args,**kwargs):
+		print("Start function")
+		func(*args,**kwargs)
+		print("End function")
+	return wrapper_add_text
+
+@add_text
+def add(num1,num2):
+	print(num1 + num2)
+
+
+Timing Decorator
+ Write a decorator that measures how long a function takes to run and prints the execution time.
+
+from datetime import datetime, timedelta
+
+def find_run_time(func):
+    def wrapper_find_run_time(*args,**kwargs):
+        start_time = datetime.now()
+        func(*args,**kwargs)
+        end_time = datetime.now()
+        print(f"The function run {end_time - start_time}")
+    return wrapper_find_run_time
+
+@find_run_time
+def sum_up_to(num):
+    sum_num = 0
+    for index in range(1,num +1):
+        sum_num += index
+
+
+sum_up_to(1000)
+
+
+
+
+Logging Arguments
+ Write a decorator that prints all arguments passed to the function before it runs.
+
+
+def expose_args(func):
+    def wrapper_expose_args(*args,**kwargs):
+        for index, value in enumerate(args):
+            print(f"argument {index} content is : {value} ")
+        func(*args,**kwargs)
+    return wrapper_expose_args
+
+@expose_args
+def get_args(name,age,address):
+    student = f"{name} {age} {address}"
+    print(f"The student is {student}")
+
+
+get_args("moshe", 25,"hadasim 2 netania")
+
+Uppercase Decorator
+ Write a decorator that converts the return value of a function to uppercase (if it’s a string).
+
+def change_to_upper(func):
+    def wrapper_change_to_upper(*args,**kwargs):
+        res = func(*args,**kwargs)
+        if isinstance(res, str):
+            return res.upper()
+        else:
+            return res
+    return wrapper_change_to_upper
+
+@change_to_upper
+def  user_detailes(name,age,address):
+    return f"The user details name {name} age {age} address {address}"
+
+
+print(user_detailes("moshe", 25,"hadasim 2 netania"))
+
+
+Count Calls
+ Write a decorator that counts how many times a function has been called.
+
+def count_func(func):
+    counter = 0
+    def wrapper_count_func(*args,**kwargs):
+        nonlocal counter
+        counter += 1
+        func(*args,**kwargs)
+        print(f"Number of functions run up to now is : {counter}")
+        
+    return wrapper_count_func
+
+@count_func
+def print_full_name(f_name,l_name):
+    print(f"first name :{f_name} last_name: {l_name}")
+
+print_full_name("moshe","cohen")
+print_full_name("haim","david")
+
+
+Intermediate Exercises
+Authentication Check
+ Write a decorator that checks if a user has permission (e.g., is_admin=True) before running the function.
+
+def check_permition(func):
+    def wrapper_check_premition(*args,**kwargs):
+        if args[2] == "admin":
+            func(*args,**kwargs)
+
+    return wrapper_check_premition
+
+@check_permition
+def user_access(user,password, premition):
+    print(f"access to website with user {user} and password {password}")
+
+user_access("beny","abd123","non admin")
+user_access("hagay","kys674","admin")
+
+
+Memoization Decorator
+ Write a decorator that caches the results of a function so repeated calls with the same arguments return instantly.
+
+
+def non_repeat_func(func):
+    result_dict ={}
+    def wrapper_non_repeat_func(*args,**kwargs):
+        nonlocal result_dict
+        if args in result_dict.keys():
+            return result_dict[args]
+        res = func(*args,**kwargs)
+        result_dict[args] = res
+        return res
+
+    return wrapper_non_repeat_func
+
+@non_repeat_func
+def ret_full_name(f_name,l_name):
+    return f"first name :{f_name} last_name: {l_name}"
+
+print(ret_full_name("moshe","cohen"))
+print(ret_full_name("moshe","cohen"))
+print(ret_full_name("haim","david"))
+
+
+
+
+Retry Decorator
+ Write a decorator that retries running a function up to 3 times if it raises an exception.
+
+
+def repeat_on_fail_func(func):
+    def wrapper_repeat_on_fail_func(*args,**kwargs):
+        count = 1
+        while count < 4:
+            try:
+                res = func(*args,**kwargs)
+                print(f"Function attempt {count} success")
+                return res
+            except:
+                print(f"Function attempt {count} fail")
+                count += 1
+        return None
+    return wrapper_repeat_on_fail_func
+
+
+@repeat_on_fail_func
+def div_nums(num1,num2):
+    if isinstance(num2, int):
+        return num1 /num2
+    raise ValueError("num2 is not numeric")
+
+div_nums(5,0)
+div_nums(6,3)
+
+
+
+
+Advanced Exercises
+Decorator with Parameters
+ Write a decorator that takes a parameter (e.g., number of times to run the function) and executes the function accordingly.
+
+
+
+Class-based Decorator
+ Implement a decorator as a class (using __call__) that measures execution time of functions and stores the history in a dictionary.
